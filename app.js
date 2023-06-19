@@ -1,5 +1,5 @@
 
-
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -10,8 +10,9 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
- //const MONGODB_URI="mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB";
-//mongoose.connect(process.env.MONGODB_URI);
+ // mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB;
+ const MONGODB_URI="mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB";
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connect("mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB");
 
 const itemsSchema = new mongoose.Schema({
