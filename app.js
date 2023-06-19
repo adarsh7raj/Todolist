@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
  // mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB;
  const MONGODB_CONNECT_URI="mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB";
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_CONNECT_URI);
 mongoose.connect("mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB");
 
 const itemsSchema = new mongoose.Schema({
