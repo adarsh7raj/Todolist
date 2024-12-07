@@ -1,4 +1,14 @@
 /node_modules
 npm-debug.log
 .DS_Store
-/*.env
+/*.env# Ignore the node_modules folder
+
+
+# Ignore npm debug log files
+npm-debug.log*
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore all environment files
+*.env

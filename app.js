@@ -10,10 +10,10 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
- // mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB;
- const MONGODB_CONNECT_URI="mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB";
+const  current_date=require(__dirname+"/date.js"); 
+ console.log(process.env.MONGODB_CONNECT_URI)
 mongoose.connect(process.env.MONGODB_CONNECT_URI);
-mongoose.connect("mongodb+srv://adarshrajyadav68:tesrect7@cluster0.ymcx3jk.mongodb.net/todolistDB");
+
 
 const itemsSchema = new mongoose.Schema({
   name: String
@@ -50,7 +50,7 @@ app.get("/", function (req, res) {
         res.redirect("/");
       });
     } else {
-      res.render("list", { listTitle: "Today", newListItems: items });
+      res.render("list", { listTitle: current_date.get_date(), newListItems: items });
     }
   });
 });
@@ -61,7 +61,7 @@ app.get("/:customListName", function (req, res) {
   List.findOne({ name: customListName }).then(function (foundList) {
     if (!foundList) {
       const list = new List({
-        name: customListName,
+        name: customListName,  //takes value from database.
         items: defaultItems
       });
 
