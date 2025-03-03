@@ -32,8 +32,10 @@ const item2 = new Item({
 const item3 = new Item({
   name: "save"
 });
-
-const defaultItems = [item1, item2, item3];
+const item4=new Item({
+  name:"Hello"
+})
+const defaultItems = [item1, item2, item3,item4];
 
 const listSchema = new mongoose.Schema({
   name: String,
@@ -43,6 +45,9 @@ const listSchema = new mongoose.Schema({
 const List = mongoose.model("List", listSchema);
 
 app.get("/", function (req, res) {
+  List.find().then(function(value){
+    console.log(value);
+  })
   Item.find().then(function (items) {
     if (items.length === 0) {
       Item.insertMany(defaultItems).then(function () {
@@ -81,6 +86,7 @@ app.get("/:customListName", function (req, res) {
 app.post("/", function (req, res) {
   const itemname = req.body.newItem;
   const listname=req.body.list;
+  
   const additem = new Item({
     name: itemname
   });
@@ -89,11 +95,16 @@ app.post("/", function (req, res) {
     res.redirect("/");
   }
   else{
-    List.findOne({name:listname}).then(function(founditem){
-      founditem.items.push(additem);
-      founditem.save();
-      res.redirect("/"+listname);
-    });
+    // List.findOne({name:listname}).then(function(founditem){
+    //   founditem.items.push(additem);
+    //   founditem.save();
+    //   res.redirect("/"+listname);
+    // });
+    console.log(itemname);
+    Item.create({name:itemname}).then(function(result){
+      console.log(result);
+       res.redirect("/");
+    })
   }
   
   
